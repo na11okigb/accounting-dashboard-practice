@@ -1,16 +1,25 @@
-import BalanceCard from "./components/BalanceCard";
+import { useState } from "react";
+import DashboardSection from "./components/DashboardSection";
+import type { Period } from "./types";
 
 function App() {
+  const [period, setPeriod] = useState<Period>("daily");
   return (
     <>
       <div className="min-h-screen p-8">
         <h1>会計ダッシュボード</h1>
-        <div className="flex flex-col md:flex-row gap-4">
-          <BalanceCard income={10000} expenditure={7000} />
-          <BalanceCard income={5000} expenditure={3000} />
-          <BalanceCard income={8000} expenditure={9000} />
-          <BalanceCard income={3000} expenditure={2000} />
-        </div>
+        <select
+          value={period}
+          onChange={(e) => setPeriod(e.target.value as Period)}
+          className="mb-4 p-2 border rounded"
+        >
+          <option value="daily">日次</option>
+          <option value="weekly">週次</option>
+          <option value="monthly">月次</option>
+          <option value="yearly">年次</option>{" "}
+        </select>
+
+        <DashboardSection period={period} />
       </div>
     </>
   );
