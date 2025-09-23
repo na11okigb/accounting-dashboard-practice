@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import type { Period } from "../types";
+import type { Period, AccountingCard } from "../types";
 import BalanceCard from "./BalanceCard";
-import type { AccountingCard } from "../types/accountingCard";
 import { fetchAccountingData } from "../api/accounting";
 
 type DashboardSectionProps = {
