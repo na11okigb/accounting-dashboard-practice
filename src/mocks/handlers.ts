@@ -18,6 +18,6 @@ export const handlers = [
       throw new Error("データの取得に失敗しました");
     }
 
-    return mockData[period];
+    return HttpResponse.json(mockData[period]);
   }),
 ];
