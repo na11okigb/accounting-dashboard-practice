@@ -2,51 +2,14 @@ import { useEffect, useState } from "react";
 import type { Period, AccountingCard } from "../types";
 import BalanceCard from "./BalanceCard";
 import { fetchAccountingData } from "../api/accounting";
+import { useAccountingData } from "../hooks/useAccountingData";
 
 type DashboardSectionProps = {
   period: Period;
 };
 
 const DashboardSection = ({ period }: DashboardSectionProps) => {
-  const [data, setData] = useState<AccountingCard | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [retryCount, setRetryCount] = useState(0);
-
-  useEffect(() => {
-    let isCancelled = false;
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        setError(null);
-
-        const data = await fetchAccountingData(period);
-
-        if (!isCancelled) {
-          setData(data);
-        }
-      } catch (err) {
-        if (!isCancelled) {
-          setError(
-            err instanceof Error
-              ? err.message
-              : "予期しないエラーが発生しました"
-          );
-        }
-      } finally {
-        if (!isCancelled) {
-          setIsLoading(false);
-        }
-      }
-    };
-
-    fetchData();
-
-    return () => {
-      isCancelled = true;
-      console.log(`[${period}] クリーンアップ実行, isCancelled = true に設定`);
-    };
-  }, [period, retryCount]);
+  const [data, isLoading, error] = useAccountingData(period);
 
   if (isLoading) {
     return <div>読み込み中...</div>;
