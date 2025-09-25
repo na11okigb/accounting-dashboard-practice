@@ -9,7 +9,8 @@ type DashboardSectionProps = {
 };
 
 const DashboardSection = ({ period }: DashboardSectionProps) => {
-  const [data, isLoading, error] = useAccountingData(period);
+  const { data, isLoading, error, setRetryCount, setRetryCount } =
+    useAccountingData(period);
 
   if (isLoading) {
     return <div>読み込み中...</div>;
