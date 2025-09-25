@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
-import type { Period, AccountingCard } from "../types";
+import type { Period } from "../types";
 import BalanceCard from "./BalanceCard";
-import { fetchAccountingData } from "../api/accounting";
 import { useAccountingData } from "../hooks/useAccountingData";
 
 type DashboardSectionProps = {
@@ -9,8 +7,7 @@ type DashboardSectionProps = {
 };
 
 const DashboardSection = ({ period }: DashboardSectionProps) => {
-  const { data, isLoading, error, setRetryCount, setRetryCount } =
-    useAccountingData(period);
+  const { data, isLoading, error, setRetryCount } = useAccountingData(period);
 
   if (isLoading) {
     return <div>読み込み中...</div>;
