@@ -42,7 +42,6 @@ export const useAccountingData = (period: Period) => {
     };
   }, [period, retryCount]);
 
-  console.log("3. returnの直前");
   return {
     data: data,
     isLoading: isLoading,
