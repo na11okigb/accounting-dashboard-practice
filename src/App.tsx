@@ -1,6 +1,5 @@
 import DashboardSection from "./components/DashboardSection";
 import PeriodSelector from "./components/PeriodSelector";
-import { usePeriodStore } from "./stores/periodStore";
 
 function App() {
   return (

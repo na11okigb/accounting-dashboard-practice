@@ -3,7 +3,8 @@ import { useAccountingData } from "../hooks/useAccountingData";
 import { usePeriodStore } from "../stores/periodStore";
 
 const DashboardSection = () => {
-  const { period } = usePeriodStore();
+  console.log("PeriodSelector がレンダリングされました");
+  const period = usePeriodStore((state) => state.period);
   const { data, isLoading, error, setRetryCount } = useAccountingData(period);
 
   if (isLoading) {

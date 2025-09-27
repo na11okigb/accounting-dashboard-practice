@@ -7,7 +7,8 @@ const PERIOD_OPTIONS = Object.entries(PERIODS).map(([key, label]) => ({
 }));
 
 const PeriodSelector = () => {
-  const { period, setPeriod } = usePeriodStore();
+  const period = usePeriodStore((state) => state.period);
+  const setPeriod = usePeriodStore((state) => state.setPeriod);
   return (
     <select
       value={period}
