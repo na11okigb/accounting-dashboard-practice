@@ -1,10 +1,9 @@
-import { useState } from "react";
 import DashboardSection from "./components/DashboardSection";
-import type { Period } from "./types";
 import PeriodSelector from "./components/PeriodSelector";
+import { usePersistedPeriod } from "./hooks/usePersistedPeriod";
 
 function App() {
-  const [period, setPeriod] = useState<Period>("daily");
+  const { period, setPeriod } = usePersistedPeriod();
   return (
     <>
       <div className="min-h-screen p-8">
