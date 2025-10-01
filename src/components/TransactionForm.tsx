@@ -6,11 +6,7 @@ const TransactionForm = () => {
     "expense"
   );
 
-  const categories = Object.entries(getCategoriesByType(transactionType)).map(
-    ([key, name]) => {
-      return { key, name };
-    }
-  );
+  const categories = getCategoriesByType(transactionType);
 
   console.log("現在の選択：", transactionType);
   return (
@@ -72,8 +68,8 @@ const TransactionForm = () => {
           <select id="category" className="border p-2 rounded w-full">
             <option value="">選択してください</option>
             {categories.map((category) => (
-              <option key={category.key} value={category.name}>
-                {category.name}
+              <option key={category.label} value={category.value}>
+                {category.label}
               </option>
             ))}
           </select>
