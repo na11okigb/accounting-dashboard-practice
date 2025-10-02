@@ -16,7 +16,7 @@ const TransactionForm = () => {
       <form>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            種別
+            種別 <span className="text-red-500">*</span>
           </label>
           <div className="flex gap-4">
             <label className="flex items-center">
@@ -49,7 +49,7 @@ const TransactionForm = () => {
             htmlFor="date"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
-            日付
+            日付<span className="text-red-500">*</span>
           </label>
           <input id="date" type="date" className="border p-2 rounded w-full" />
         </div>
@@ -58,7 +58,7 @@ const TransactionForm = () => {
             htmlFor="amount"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
-            金額
+            金額<span className="text-red-500">*</span>
           </label>
           <input
             id="amount"
@@ -72,7 +72,7 @@ const TransactionForm = () => {
             htmlFor="category"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
-            カテゴリ
+            カテゴリ<span className="text-red-500">*</span>
           </label>
           <select id="category" className="border p-2 rounded w-full">
             <option value="">選択してください</option>
