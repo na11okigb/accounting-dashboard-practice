@@ -48,7 +48,9 @@ const TransactionForm = () => {
           <label
             htmlFor="date"
             className="block text-sm font-medium text-gray-700 mb-2"
-          ></label>
+          >
+            日付
+          </label>
           <input id="date" type="date" className="border p-2 rounded w-full" />
         </div>
         <div className="mb-4">
@@ -80,6 +82,20 @@ const TransactionForm = () => {
               </option>
             ))}
           </select>
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="note"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
+            備考
+          </label>
+          <textarea
+            id="note"
+            placeholder="備考"
+            rows={4}
+            className="block p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          ></textarea>
         </div>
         <button
           type="submit"
