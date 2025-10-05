@@ -1,16 +1,27 @@
-import { useState } from "react";
 import { getCategoriesByType } from "../constants/transaction";
 import { useForm } from "react-hook-form";
 
 const TransactionForm = () => {
-  const { register, handleSubmit, watch } = useForm();
-  const [transactionType, setTransactionType] = useState<"income" | "expense">(
-    "expense"
-  );
-  const categories = getCategoriesByType(transactionType);
+  type FormData = {
+    type: "income" | "expense";
+    amount: string;
+    category: string;
+    date: string;
+    memo: string;
+  };
 
-  console.log("現在の選択：", transactionType);
-  console.log("フォームの値", watch());
+  const { register, handleSubmit, watch } = useForm<FormData>({
+    defaultValues: {
+      type: "expense",
+      amount: "",
+      category: "",
+      date: "",
+      memo: "",
+    },
+  });
+
+  const categories = getCategoriesByType(watch("type"));
+  console.log("フォームの値:", watch());
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
@@ -25,10 +36,8 @@ const TransactionForm = () => {
             <label className="flex items-center">
               <input
                 type="radio"
-                name="type"
                 value="income"
-                checked={transactionType === "income"}
-                onChange={() => setTransactionType("income")}
+                {...register("type")}
                 className="mr-2"
               />
               <span className="text-green-600">収入</span>
@@ -36,10 +45,8 @@ const TransactionForm = () => {
             <label className="flex items-center">
               <input
                 type="radio"
-                name="type"
                 value="expense"
-                checked={transactionType === "expense"}
-                onChange={() => setTransactionType("expense")}
+                {...register("type")}
                 defaultChecked
                 className="mr-2"
               />
