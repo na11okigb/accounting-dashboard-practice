@@ -1,5 +1,6 @@
 import { getCategoriesByType } from "../constants/transaction";
 import { useForm } from "react-hook-form";
+import "../schema/transactionSchema";
 
 const TransactionForm = () => {
   type FormData = {
