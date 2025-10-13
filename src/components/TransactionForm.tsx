@@ -46,6 +46,13 @@ const TransactionForm = () => {
         </div>
         <div className="mb-4">
           <label
+            htmlFor="date"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          ></label>
+          <input id="date" type="date" className="border p-2 rounded w-full" />
+        </div>
+        <div className="mb-4">
+          <label
             htmlFor="amount"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
