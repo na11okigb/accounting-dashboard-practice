@@ -1,6 +1,7 @@
 import { getCategoriesByType } from "../constants/transaction";
 import { useForm } from "react-hook-form";
-import "../schema/transactionSchema";
+import * as v from "valibot";
+import { valibotResolver } from "@hookform/resolvers/valibot";
 
 const TransactionForm = () => {
   type FormData = {
@@ -11,7 +12,29 @@ const TransactionForm = () => {
     memo: string;
   };
 
-  const { register, handleSubmit, watch, setValue, reset } = useForm<FormData>({
+  const transactionSchema = v.object({
+    type: v.picklist(["income", "expense"]),
+    amount: v.pipe(
+      v.string(),
+      v.nonEmpty("金額は必須です"),
+      v.transform((value) => Number(value)),
+      v.number("金額は数値のみ入力してください"),
+      v.minValue(1, "1円以上を入力してください")
+    ),
+    category: v.string(),
+    date: v.string(),
+    memo: v.string(),
+  });
+
+  // useFormに resolver を追加
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<FormData>({
     defaultValues: {
       type: "expense",
       amount: "",
@@ -19,6 +42,7 @@ const TransactionForm = () => {
       date: "",
       memo: "",
     },
+    resolver: valibotResolver(transactionSchema),
   });
 
   const categories = getCategoriesByType(watch("type"));
@@ -94,8 +118,13 @@ const TransactionForm = () => {
             type="text"
             placeholder="1000"
             {...register("amount")}
-            className="border p-2 rounded"
+            className={`border p-2 rounded ${
+              errors.amount ? "border-red-500" : ""
+            }`}
           />
+          {errors.amount && (
+            <p className="text-red-500 text-sm mt-1">{errors.amount.message}</p>
+          )}
         </div>
         <div className="mb-4">
           <label
