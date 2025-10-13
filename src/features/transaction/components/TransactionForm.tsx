@@ -1,38 +1,7 @@
-import { getCategoriesByType } from "../constants/transaction";
-import { useForm } from "react-hook-form";
-import { valibotResolver } from "@hookform/resolvers/valibot";
-import type { FormData } from "../features/transaction/types";
-import { transactionSchema } from "../features/transaction/schemas/intex";
+import { useTransactionForm } from "../hooks/useTransactionForm";
 
 const TransactionForm = () => {
-  // useFormに resolver を追加
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-    reset,
-    formState: { errors },
-  } = useForm<FormData>({
-    defaultValues: {
-      type: "expense",
-      amount: "",
-      category: "",
-      date: "",
-      memo: "",
-    },
-    resolver: valibotResolver(transactionSchema),
-    mode: "onSubmit",
-    reValidateMode: "onChange",
-  });
-
-  const categories = getCategoriesByType(watch("type"));
-  const typeRegister = register("type");
-
-  const onSubmit = (data: FormData) => {
-    console.log("フォームデータ:", data);
-  };
-  console.log("レンダリング");
+  const { register, errors, handleSubmit, onSubmit } = useTransactionForm();
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
