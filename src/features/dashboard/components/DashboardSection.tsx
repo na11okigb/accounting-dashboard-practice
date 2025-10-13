@@ -1,5 +1,6 @@
 import { useAccountingData } from "../hooks/useAccountingData";
 import BalanceCard from "./BalanceCard";
+import PeriodSelector from "./PeriodSelector";
 
 const DashboardSection = () => {
   const { data, isLoading, error, setRetryCount } = useAccountingData();
@@ -24,6 +25,7 @@ const DashboardSection = () => {
 
   return (
     <>
+      <PeriodSelector />
       <div className="flex flex-col md:flex-row gap-4">
         <BalanceCard title="収入" value={data.income} />
         <BalanceCard title="支出" value={data.expense} />

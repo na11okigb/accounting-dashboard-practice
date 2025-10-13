@@ -1,4 +1,2 @@
-export type AccountingCard = {
-  income: number;
-  expense: number;
-};
+export * from "./accountingCard";
+export * from "./period";

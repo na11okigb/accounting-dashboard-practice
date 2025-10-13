@@ -1,5 +1,6 @@
 import { http, HttpResponse } from "msw";
-import type { AccountingCard, Period } from "../types";
+import type { Period } from "../features/dashboard/types/period";
+import type { AccountingCard } from "../features/dashboard/types/accountingCard";
 
 // periodに応じたデータを返す
 const mockData: Record<Period, AccountingCard> = {

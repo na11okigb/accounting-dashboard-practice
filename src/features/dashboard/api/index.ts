@@ -1,5 +1,4 @@
-import type { Period } from "../../../types/period";
-import type { AccountingCard } from "../types";
+import type { AccountingCard, Period } from "../types";
 
 export const fetchAccountingData = async (
   period: Period
