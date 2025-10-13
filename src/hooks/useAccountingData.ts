@@ -42,4 +42,12 @@ export const useAccountingData = async (period: Period) => {
       console.log(`[${period}] クリーンアップ実行, isCancelled = true に設定`);
     };
   }, [period, retryCount]);
+
+  return {
+    data: data,
+    isLoading: isLoading,
+    error: error,
+    retryCount: retryCount,
+    setRetryCount: setRetryCount,
+  };
 };
