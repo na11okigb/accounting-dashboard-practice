@@ -1,12 +1,9 @@
-import type { Period } from "../types";
 import BalanceCard from "./BalanceCard";
 import { useAccountingData } from "../hooks/useAccountingData";
+import { usePeriodStore } from "../stores/periodStore";
 
-type DashboardSectionProps = {
-  period: Period;
-};
-
-const DashboardSection = ({ period }: DashboardSectionProps) => {
+const DashboardSection = () => {
+  const { period } = usePeriodStore();
   const { data, isLoading, error, setRetryCount } = useAccountingData(period);
 
   if (isLoading) {

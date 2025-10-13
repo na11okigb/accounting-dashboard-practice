@@ -1,17 +1,13 @@
-import React from "react";
 import { PERIODS, type Period } from "../types";
+import { usePeriodStore } from "../stores/periodStore";
 
 const PERIOD_OPTIONS = Object.entries(PERIODS).map(([key, label]) => ({
   value: key as Period,
   label: label,
 }));
 
-type periodSelectorProps = {
-  period: Period;
-  setPeriod: React.Dispatch<React.SetStateAction<Period>>;
-};
-
-const PeriodSelector = ({ period, setPeriod }: periodSelectorProps) => {
+const PeriodSelector = () => {
+  const { period, setPeriod } = usePeriodStore();
   return (
     <select
       value={period}
