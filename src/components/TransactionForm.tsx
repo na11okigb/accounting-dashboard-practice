@@ -43,6 +43,8 @@ const TransactionForm = () => {
       memo: "",
     },
     resolver: valibotResolver(transactionSchema),
+    mode: "onSubmit",
+    reValidateMode: "onChange",
   });
 
   const categories = getCategoriesByType(watch("type"));
