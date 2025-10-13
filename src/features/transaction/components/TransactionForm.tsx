@@ -1,7 +1,17 @@
 import { useTransactionForm } from "../hooks/useTransactionForm";
 
 const TransactionForm = () => {
-  const { register, errors, handleSubmit, onSubmit } = useTransactionForm();
+  const {
+    register,
+    errors,
+    handleSubmit,
+    setValue,
+    categories,
+    onSubmit,
+    reset,
+  } = useTransactionForm();
+
+  const typeRegister = register("type");
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
@@ -19,7 +29,7 @@ const TransactionForm = () => {
                 value="income"
                 {...register("type")}
                 onChange={(e) => {
-                  typeRegister.onChange(e);
+                  register("type").onChange(e);
                   setValue("category", "");
                 }}
                 className="mr-2"
