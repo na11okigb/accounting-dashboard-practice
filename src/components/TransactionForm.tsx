@@ -10,7 +10,7 @@ const TransactionForm = () => {
     memo: string;
   };
 
-  const { register, handleSubmit, watch } = useForm<FormData>({
+  const { register, handleSubmit, watch, setValue } = useForm<FormData>({
     defaultValues: {
       type: "expense",
       amount: "",
@@ -21,7 +21,7 @@ const TransactionForm = () => {
   });
 
   const categories = getCategoriesByType(watch("type"));
-  console.log("フォームの値:", watch());
+  const typeRegister = register("type");
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
@@ -38,6 +38,10 @@ const TransactionForm = () => {
                 type="radio"
                 value="income"
                 {...register("type")}
+                onChange={(e) => {
+                  typeRegister.onChange(e);
+                  setValue("category", "");
+                }}
                 className="mr-2"
               />
               <span className="text-green-600">収入</span>
@@ -47,6 +51,10 @@ const TransactionForm = () => {
                 type="radio"
                 value="expense"
                 {...register("type")}
+                onChange={(e) => {
+                  typeRegister.onChange(e);
+                  setValue("category", "");
+                }}
                 defaultChecked
                 className="mr-2"
               />
@@ -85,7 +93,11 @@ const TransactionForm = () => {
           >
             カテゴリ<span className="text-red-500">*</span>
           </label>
-          <select id="category" className="border p-2 rounded w-full">
+          <select
+            id="category"
+            {...register("category")}
+            className="border p-2 rounded w-full"
+          >
             <option value="">選択してください</option>
             {categories.map((category) => (
               <option key={category.label} value={category.value}>
