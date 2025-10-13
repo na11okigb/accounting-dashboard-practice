@@ -3,21 +3,21 @@ export const TRANSACTION_TYPES = {
   expense: "支出",
 } as const;
 
-export const INCOME_CATEGORIES = {
-  salary: "給料",
-  bonus: "賞与",
-  investment: "投資収益",
-  other: "その他",
-} as const;
+export const INCOME_CATEGORIES = [
+  { value: "salary", label: "給料" },
+  { value: "bonus", label: "賞与" },
+  { value: "investment", label: "投資収益" },
+  { value: "other", label: "その他" },
+] as const;
 
-export const EXPENSE_CATEGORIES = {
-  food: "食費",
-  transport: "交通費",
-  utilities: "光熱費",
-  entertainment: "娯楽費",
-  housing: "住居費",
-  other: "その他",
-} as const;
+export const EXPENSE_CATEGORIES = [
+  { value: "food", label: "食費" },
+  { value: "transport", label: "交通費" },
+  { value: "utilities", label: "光熱費" },
+  { value: "entertainment", label: "娯楽費" },
+  { value: "housing", label: "住居費" },
+  { value: "other", label: "その他" },
+] as const;
 
 export const getCategoriesByType = (type: "income" | "expense") => {
   return type === "income" ? INCOME_CATEGORIES : EXPENSE_CATEGORIES;
