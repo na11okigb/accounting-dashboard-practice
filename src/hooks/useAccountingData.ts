@@ -6,6 +6,7 @@ export const useAccountingData = async (period: Period) => {
   const [data, setData] = useState<AccountingCard | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [retryCount, setRetryCount] = useState(0);
 
   useEffect(() => {
     let isCancelled = false;
