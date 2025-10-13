@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { AccountingCard, Period } from "../types";
 import { fetchAccountingData } from "../api/accounting";
 
-export const useAccountingData = async (period: Period) => {
+export const useAccountingData = (period: Period) => {
   const [data, setData] = useState<AccountingCard | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
