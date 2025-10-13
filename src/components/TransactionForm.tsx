@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { getCategoriesByType } from "../constants/transaction";
+import { useForm } from "react-hook-form";
 
 const TransactionForm = () => {
+  const { register, handleSubmit, watch } = useForm();
   const [transactionType, setTransactionType] = useState<"income" | "expense">(
     "expense"
   );
-
   const categories = getCategoriesByType(transactionType);
 
   console.log("現在の選択：", transactionType);
+  console.log("フォームの値", watch());
+
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
       <h2 className="text-xl font-bold mb-4">取引を登録</h2>
@@ -64,6 +67,7 @@ const TransactionForm = () => {
             id="amount"
             type="text"
             placeholder="1000"
+            {...register("amount")}
             className="border p-2 rounded"
           />
         </div>
