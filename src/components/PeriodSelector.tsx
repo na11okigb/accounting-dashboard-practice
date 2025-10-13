@@ -19,7 +19,9 @@ const PeriodSelector = ({ period, setPeriod }: periodSelectorProps) => {
       className="mb-4 p-2 border rounded"
     >
       {PERIOD_OPTIONS.map((it) => (
-        <option value={it.value}>{it.label}</option>
+        <option key={it.label} value={it.value}>
+          {it.label}
+        </option>
       ))}
     </select>
   );
