@@ -1,31 +1,10 @@
 import { getCategoriesByType } from "../constants/transaction";
 import { useForm } from "react-hook-form";
-import * as v from "valibot";
 import { valibotResolver } from "@hookform/resolvers/valibot";
+import type { FormData } from "../features/transaction/types";
+import { transactionSchema } from "../features/transaction/schemas/intex";
 
 const TransactionForm = () => {
-  type FormData = {
-    type: "income" | "expense";
-    amount: string;
-    category: string;
-    date: string;
-    memo: string;
-  };
-
-  const transactionSchema = v.object({
-    type: v.picklist(["income", "expense"]),
-    amount: v.pipe(
-      v.string(),
-      v.nonEmpty("金額は必須です"),
-      v.transform((value) => Number(value)),
-      v.number("金額は数値のみ入力してください"),
-      v.minValue(1, "1円以上を入力してください")
-    ),
-    category: v.string(),
-    date: v.string(),
-    memo: v.string(),
-  });
-
   // useFormに resolver を追加
   const {
     register,
