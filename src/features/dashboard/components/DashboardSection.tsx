@@ -1,5 +1,5 @@
-import BalanceCard from "./BalanceCard";
 import { useAccountingData } from "../hooks/useAccountingData";
+import BalanceCard from "./BalanceCard";
 
 const DashboardSection = () => {
   const { data, isLoading, error, setRetryCount } = useAccountingData();
