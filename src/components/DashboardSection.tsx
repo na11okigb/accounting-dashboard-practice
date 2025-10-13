@@ -1,11 +1,8 @@
 import BalanceCard from "./BalanceCard";
 import { useAccountingData } from "../hooks/useAccountingData";
-import { usePeriodStore } from "../stores/periodStore";
 
 const DashboardSection = () => {
-  console.log("PeriodSelector がレンダリングされました");
-  const period = usePeriodStore((state) => state.period);
-  const { data, isLoading, error, setRetryCount } = useAccountingData(period);
+  const { data, isLoading, error, setRetryCount } = useAccountingData();
 
   if (isLoading) {
     return <div>読み込み中...</div>;

@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import type { AccountingCard, Period } from "../types";
+import type { AccountingCard } from "../types";
 import { fetchAccountingData } from "../api/accounting";
+import { usePeriodStore } from "../stores/periodStore";
 
-export const useAccountingData = (period: Period) => {
+export const useAccountingData = () => {
+  const period = usePeriodStore((state) => state.period);
+
   const [data, setData] = useState<AccountingCard | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
