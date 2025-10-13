@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import type { Period } from "../types";
+import { persist } from "zustand/middleware";
 
 type PeriodStore = {
   // 状態
@@ -9,10 +10,17 @@ type PeriodStore = {
   setPeriod: (period: Period) => void;
 };
 
-export const usePeriodStore = create<PeriodStore>((set) => ({
-  // 初期値
-  period: "daily",
+export const usePeriodStore = create<PeriodStore>()(
+  persist(
+    (set) => ({
+      // 初期値
+      period: "daily",
 
-  // periodを更新するアクション
-  setPeriod: (period) => set({ period }),
-}));
+      // periodを更新するアクション
+      setPeriod: (period) => set({ period }),
+    }),
+    {
+      name: "accounting-period",
+    }
+  )
+);
