@@ -1,15 +1,16 @@
 import { useState } from "react";
+import { getCategoriesByType } from "../constants/transaction";
 
 const TransactionForm = () => {
-  const EXPENSE_CATEGORIES = [
-    { value: "food", label: "食費" },
-    { value: "transport", label: "交通費" },
-    { value: "utilities", label: "光熱費" },
-    { value: "entertainment", label: "娯楽費" },
-    { value: "housing", label: "住居費" },
-    { value: "other", label: "その他" },
-  ];
-  const [transactionType, setTransactionType] = useState("expense");
+  const [transactionType, setTransactionType] = useState<"income" | "expense">(
+    "expense"
+  );
+
+  const categories = Object.entries(getCategoriesByType(transactionType)).map(
+    ([key, name]) => {
+      return { key, name };
+    }
+  );
 
   console.log("現在の選択：", transactionType);
   return (
@@ -28,7 +29,7 @@ const TransactionForm = () => {
                 name="type"
                 value="income"
                 checked={transactionType === "income"}
-                onChange={(e) => setTransactionType(e.target.value)}
+                onChange={() => setTransactionType("income")}
                 className="mr-2"
               />
               <span className="text-green-600">収入</span>
@@ -39,7 +40,7 @@ const TransactionForm = () => {
                 name="type"
                 value="expense"
                 checked={transactionType === "expense"}
-                onChange={(e) => setTransactionType(e.target.value)}
+                onChange={() => setTransactionType("expense")}
                 defaultChecked
                 className="mr-2"
               />
@@ -70,9 +71,9 @@ const TransactionForm = () => {
           </label>
           <select id="category" className="border p-2 rounded w-full">
             <option value="">選択してください</option>
-            {EXPENSE_CATEGORIES.map((category) => (
-              <option key={category.value} value={category.value}>
-                {category.label}
+            {categories.map((category) => (
+              <option key={category.key} value={category.name}>
+                {category.name}
               </option>
             ))}
           </select>
