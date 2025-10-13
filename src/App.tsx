@@ -1,6 +1,6 @@
 import DashboardSection from "./components/DashboardSection";
 import PeriodSelector from "./components/PeriodSelector";
-import TransactionForm from "./components/TransactionForm";
+import TransactionForm from "./features/transaction/components/TransactionForm";
 
 function App() {
   return (

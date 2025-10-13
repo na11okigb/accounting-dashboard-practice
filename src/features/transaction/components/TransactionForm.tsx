@@ -1,15 +1,8 @@
 import { useTransactionForm } from "../hooks/useTransactionForm";
 
 const TransactionForm = () => {
-  const {
-    register,
-    errors,
-    handleSubmit,
-    setValue,
-    categories,
-    onSubmit,
-    reset,
-  } = useTransactionForm();
+  const { register, errors, setValue, onSubmit, categories, reset } =
+    useTransactionForm();
 
   const typeRegister = register("type");
 
@@ -17,7 +10,7 @@ const TransactionForm = () => {
     <div className="bg-white rounded-lg shadow-md p-6">
       <h2 className="text-xl font-bold mb-4">取引を登録</h2>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={onSubmit}>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
             種別 <span className="text-red-500">*</span>

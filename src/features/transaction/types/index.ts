@@ -1,4 +1,5 @@
-import type { TransactionInput, TransactionOutput } from "../schemas/intex";
-
-export type FormInput = TransactionInput;
-export type FormData = TransactionOutput;
+// スキーマから生成された型を使用
+export type {
+  TransactionFormInput,
+  TransactionFormOutput,
+} from "../schemas/intex";
