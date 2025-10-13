@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import type { Period } from "../types";
 import BalanceCard from "./BalanceCard";
+import type { AccountingCard } from "../types/accountingCard";
+import { fetchAccountingData } from "../api/accounting";
 
 type DashboardSectionProps = {
   period: Period;
 };
 
 const DashboardSection = ({ period }: DashboardSectionProps) => {
-  const [data, setData] = useState<{ income: number; expense: number } | null>(
-    null
-  );
+  const [data, setData] = useState<AccountingCard | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [retryCount, setRetryCount] = useState(0);
@@ -21,22 +21,10 @@ const DashboardSection = ({ period }: DashboardSectionProps) => {
         setIsLoading(true);
         setError(null);
 
-        if (Math.random() < 0.3) {
-          throw new Error("データの取得に失敗しました");
-        }
-
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-
-        // periodに応じたデータを返す
-        const mockData = {
-          daily: { income: 10000, expense: 7000 },
-          weekly: { income: 70000, expense: 45000 },
-          monthly: { income: 300000, expense: 200000 },
-          yearly: { income: 3600000, expense: 2400000 },
-        };
+        const data = await fetchAccountingData(period);
 
         if (!isCancelled) {
-          setData(mockData[period]);
+          setData(data);
         }
       } catch (err) {
         if (!isCancelled) {
