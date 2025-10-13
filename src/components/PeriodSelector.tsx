@@ -1,12 +1,10 @@
 import React from "react";
-import type { Period } from "../types";
+import { PERIODS, type Period } from "../types";
 
-const PERIOD_OPTIONS = [
-  { value: "daily", label: "日次" },
-  { value: "weekly", label: "週次" },
-  { value: "monthly", label: "月次" },
-  { value: "yearly", label: "年次" },
-];
+const PERIOD_OPTIONS = Object.entries(PERIODS).map(([key, label]) => ({
+  value: key as Period,
+  label: label,
+}));
 
 type periodSelectorProps = {
   period: Period;
