@@ -1,15 +1,4 @@
-export type FormInput = {
-  type: "income" | "expense";
-  amount: string;
-  category: string;
-  date: string;
-  memo: string;
-};
+import type { TransactionInput, TransactionOutput } from "../schemas/intex";
 
-export type FormData = {
-  type: "income" | "expense";
-  amount: number; // 変換後は数値！
-  category: string;
-  date: string;
-  memo: string;
-};
+export type FormInput = TransactionInput;
+export type FormData = TransactionOutput;

@@ -9,7 +9,10 @@ export const transactionSchema = v.object({
     v.number("金額は数値のみ入力してください"),
     v.minValue(1, "1円以上を入力してください")
   ),
-  category: v.string(),
-  date: v.string(),
-  memo: v.string(),
+  category: v.pipe(v.string(), v.nonEmpty("カテゴリは必須です")),
+  date: v.pipe(v.string(), v.nonEmpty("日付は必須です")),
+  memo: v.optional(v.string()),
 });
+
+export type TransactionInput = v.InferInput<typeof transactionSchema>;
+export type TransactionOutput = v.InferOutput<typeof transactionSchema>;

@@ -1,36 +1,39 @@
 import { useForm } from "react-hook-form";
-import { getCategoriesByType } from "../../../constants/transaction";
-import { transactionSchema } from "../schemas/intex";
 import { valibotResolver } from "@hookform/resolvers/valibot";
-import type { FormData, FormInput } from "../types";
-
+import {
+  transactionSchema,
+  type TransactionInput,
+  type TransactionOutput,
+} from "../schemas/intex";
 export const useTransactionForm = () => {
-  const { register, handleSubmit, watch, setValue, reset, formState } =
-    useForm<FormInput>({
-      defaultValues: {
-        type: "expense",
-        amount: "",
-        category: "",
-        date: "",
-        memo: "",
-      },
-      //resolver: valibotResolver(transactionSchema),
-      resolver: valibotResolver<FormData>(transactionSchema),
-      mode: "onSubmit",
-      reValidateMode: "onChange",
-    });
+  const { register, handleSubmit, watch, setValue, reset, formState } = useForm<
+    TransactionInput,
+    TransactionOutput
+  >({
+    //     ↑入力型        ↑context  ↑出力型
+    defaultValues: {
+      type: "expense",
+      amount: "", // string
+      category: "",
+      date: "",
+      memo: "",
+    },
+    resolver: valibotResolver(transactionSchema),
+    mode: "onSubmit",
+    reValidateMode: "onChange",
+  });
 
-  const onSubmit = (data: FormData) => {
-    console.log("フォームデータ:", data);
+  const onSubmit = (data: TransactionOutput) => {
+    console.log("データ:", data);
+    console.log("amountの型:", typeof data.amount); // number
   };
 
   return {
     register,
+    errors: formState.errors,
     watch,
     setValue,
     reset,
-    errors: formState.errors,
-    categories: getCategoriesByType(watch("type")),
     onSubmit: handleSubmit(onSubmit),
   };
 };
