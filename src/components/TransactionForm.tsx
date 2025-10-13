@@ -21,10 +21,11 @@ const TransactionForm = () => {
   });
 
   const categories = getCategoriesByType(watch("type"));
-  const typeRegister = register("type");
 
   const onSubmit = (data: FormData) => {
     console.log("フォームデータ:", data);
+    console.log("送信データ:", data);
+    console.log("特にtype:", data.type);
   };
   console.log("レンダリング");
 
@@ -43,8 +44,7 @@ const TransactionForm = () => {
                 type="radio"
                 value="income"
                 {...register("type")}
-                onChange={(e) => {
-                  typeRegister.onChange(e);
+                onChange={() => {
                   setValue("category", "");
                 }}
                 className="mr-2"
@@ -56,8 +56,7 @@ const TransactionForm = () => {
                 type="radio"
                 value="expense"
                 {...register("type")}
-                onChange={(e) => {
-                  typeRegister.onChange(e);
+                onChange={() => {
                   setValue("category", "");
                 }}
                 defaultChecked
