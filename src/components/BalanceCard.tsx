@@ -10,7 +10,7 @@ const BalanceCard = ({ income, expenditure }: BalanceCardProps) => {
 
   return (
     <>
-      <div className="rounded bg-gray-200 w-64 p-5 shadow-md">
+      <div className="rounded bg-gray-200 w-full md:flex-1 p-4 shadow-md">
         <h4>収支</h4>
         <span className={`${balanceColor()}`}>{income - expenditure}円</span>
       </div>
